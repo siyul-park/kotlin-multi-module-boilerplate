@@ -13,7 +13,6 @@ buildscript {
 }
 
 plugins {
-    application
     kotlin("jvm")
     id("org.jlleitschuh.gradle.ktlint")
 }
@@ -21,17 +20,16 @@ plugins {
 group = "io.github.siyual_park"
 version = "0.0.1-SNAPSHOT"
 
-repositories {
-    mavenLocal()
-    jcenter()
+allprojects {
+    apply(plugin = "kotlin")
+    apply(plugin = "org.jlleitschuh.gradle.ktlint")
+
+    repositories {
+        mavenLocal()
+        jcenter()
+    }
+
+    dependencies {
+        implementation(kotlin("stdlib"))
+    }
 }
-
-dependencies {
-    implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version")
-}
-
-kotlin.sourceSets["main"].kotlin.srcDirs("src/main")
-kotlin.sourceSets["test"].kotlin.srcDirs("src/test")
-
-sourceSets["main"].resources.srcDirs("src/main/resources")
-sourceSets["test"].resources.srcDirs("src/test/resources")
