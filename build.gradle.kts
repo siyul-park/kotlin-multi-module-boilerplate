@@ -5,7 +5,7 @@ buildscript {
 
     repositories {
         maven { url = uri("https://plugins.gradle.org/m2/") }
-        jcenter()
+        mavenCentral()
     }
     dependencies {
         classpath("org.jlleitschuh.gradle:ktlint-gradle:$klint_version")
@@ -26,10 +26,21 @@ allprojects {
 
     repositories {
         mavenLocal()
-        jcenter()
+        mavenCentral()
     }
 
     dependencies {
         implementation(kotlin("stdlib"))
     }
+}
+
+tasks.withType<Jar> { duplicatesStrategy = DuplicatesStrategy.INHERIT }
+tasks.withType<org.jetbrains.kotlin.gradle.tasks.KotlinCompile> {
+    kotlinOptions {
+        freeCompilerArgs = listOf("-Xjsr305=strict")
+        jvmTarget = "11"
+    }
+}
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

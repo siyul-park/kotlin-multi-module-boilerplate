@@ -1,4 +1,4 @@
-rootProject.name = "ktor-boilerplate"
+rootProject.name = "kotlin-boilerplate"
 
 fun includeModules(pathname: String) {
     File(pathname).listFiles()?.forEach {
